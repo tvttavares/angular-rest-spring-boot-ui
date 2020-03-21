@@ -1,9 +1,10 @@
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { InputTextModule } from 'primeng/inputtext';
-import { ButtonModule } from 'primeng/button';
-import { TableModule } from 'primeng/table';
+import { InputTextModule } from 'primeng/components/inputtext/inputtext';
+import { ButtonModule } from 'primeng/components/button/button';
+import { DataTableModule } from 'primeng/components/datatable/datatable';
 
 import { AppComponent } from './app.component';
 
@@ -15,7 +16,7 @@ import { AppComponent } from './app.component';
     BrowserModule,
     InputTextModule,
     ButtonModule,
-    TableModule
+    DataTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
