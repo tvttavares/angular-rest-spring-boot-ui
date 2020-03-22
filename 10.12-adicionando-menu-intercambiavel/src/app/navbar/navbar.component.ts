@@ -5,6 +5,11 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent {
-  exibindoMenu = false;
+export class NavbarComponent implements OnInit {
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+
 }
