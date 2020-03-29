@@ -2,13 +2,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { InputTextModule } from 'primeng/inputtext';
-import { ButtonModule } from 'primeng/button';
-import { TableModule } from 'primeng/table';
-import { TooltipModule } from 'primeng/tooltip';
-import { InputTextareaModule } from 'primeng/inputtextarea';
-import { CalendarModule } from 'primeng/calendar';
-import { SelectButtonModule } from 'primeng/selectbutton';
+import { InputTextModule } from 'primeng/components/inputtext/inputtext';
+import { ButtonModule } from 'primeng/components/button/button';
+import { DataTableModule } from 'primeng/components/datatable/datatable';
+import { TooltipModule } from 'primeng/components/tooltip/tooltip';
+import { InputTextareaModule } from 'primeng/components/inputtextarea/inputtextarea';
+import { CalendarModule } from 'primeng/components/calendar/calendar';
+import { SelectButtonModule } from 'primeng/components/selectbutton/selectbutton';
 
 import { AppComponent } from './app.component';
 import { LancamentosPesquisaComponent } from './lancamentos-pesquisa/lancamentos-pesquisa.component';
@@ -29,7 +29,7 @@ import { LancamentoCadastroComponent } from './lancamento-cadastro/lancamento-ca
     BrowserAnimationsModule,
     InputTextModule,
     ButtonModule,
-    TableModule,
+    DataTableModule,
     TooltipModule,
     InputTextareaModule,
     CalendarModule,
