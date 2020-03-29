@@ -2,16 +2,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { InputTextModule } from 'primeng/inputtext';
-import { ButtonModule } from 'primeng/button';
-import { TableModule } from 'primeng/table';
-import { TooltipModule } from 'primeng/tooltip';
-import { InputTextareaModule } from 'primeng/inputtextarea';
-import { CalendarModule } from 'primeng/calendar';
-import { SelectButtonModule } from 'primeng/selectbutton';
-import { DropdownModule } from 'primeng/dropdown';
-import { NgxCurrencyModule } from 'ngx-currency';
-import { InputMaskModule } from 'primeng/inputmask';
+import { InputTextModule } from 'primeng/components/inputtext/inputtext';
+import { ButtonModule } from 'primeng/components/button/button';
+import { DataTableModule } from 'primeng/components/datatable/datatable';
+import { TooltipModule } from 'primeng/components/tooltip/tooltip';
+import { InputTextareaModule } from 'primeng/components/inputtextarea/inputtextarea';
+import { CalendarModule } from 'primeng/components/calendar/calendar';
+import { SelectButtonModule } from 'primeng/components/selectbutton/selectbutton';
+import { DropdownModule } from 'primeng/components/dropdown/dropdown';
+import { InputMaskModule } from 'primeng/components/inputmask/inputmask';
+
+import { CurrencyMaskModule } from 'ng2-currency-mask';
 
 import { AppComponent } from './app.component';
 import { LancamentosPesquisaComponent } from './lancamentos-pesquisa/lancamentos-pesquisa.component';
@@ -32,16 +33,18 @@ import { PessoaCadastroComponent } from './pessoa-cadastro/pessoa-cadastro.compo
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+
     InputTextModule,
     ButtonModule,
-    TableModule,
+    DataTableModule,
     TooltipModule,
     InputTextareaModule,
     CalendarModule,
     SelectButtonModule,
     DropdownModule,
-    NgxCurrencyModule,
-    InputMaskModule
+    InputMaskModule,
+
+    CurrencyMaskModule
   ],
   providers: [],
   bootstrap: [AppComponent]
