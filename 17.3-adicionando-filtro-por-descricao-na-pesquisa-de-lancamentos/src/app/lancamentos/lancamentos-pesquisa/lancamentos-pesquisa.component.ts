@@ -6,10 +6,10 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './lancamentos-pesquisa.component.html',
   styleUrls: ['./lancamentos-pesquisa.component.css']
 })
-export class LancamentosPesquisaComponent implements OnInit{
+export class LancamentosPesquisaComponent implements OnInit {
 
-  lancamentos = [];
   descricao: string;
+  lancamentos = [];
 
   constructor(private lancamentoService: LancamentoService) { }
 
@@ -19,7 +19,7 @@ export class LancamentosPesquisaComponent implements OnInit{
 
   pesquisar() {
     this.lancamentoService.pesquisar({ descricao: this.descricao })
-      .then((data) => this.lancamentos = data.content);
-      // .then(() => null);
+      .then(lancamentos => this.lancamentos = lancamentos);
   }
+
 }
