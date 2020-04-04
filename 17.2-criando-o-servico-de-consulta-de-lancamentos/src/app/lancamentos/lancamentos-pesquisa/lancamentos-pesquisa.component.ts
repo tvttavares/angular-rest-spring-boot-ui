@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './lancamentos-pesquisa.component.html',
   styleUrls: ['./lancamentos-pesquisa.component.css']
 })
-export class LancamentosPesquisaComponent implements OnInit{
+export class LancamentosPesquisaComponent implements OnInit {
 
   lancamentos = [];
 
@@ -18,7 +18,7 @@ export class LancamentosPesquisaComponent implements OnInit{
 
   pesquisar() {
     this.lancamentoService.pesquisar()
-      .then((data) => this.lancamentos = data.content);
-      // .then(() => null);
+      .then(lancamentos => this.lancamentos = lancamentos);
   }
+
 }
