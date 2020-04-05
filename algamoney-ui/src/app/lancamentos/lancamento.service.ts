@@ -3,10 +3,12 @@ import { Injectable } from '@angular/core';
 
 import * as moment from 'moment';
 
-export interface LancamentoFiltro {
+export class LancamentoFiltro {
   descricao: string;
   dataVencimentoInicio: Date;
   dataVencimentoFim: Date;
+  pagina = 0;
+  itensPorPagina = 5;
 }
 
 @Injectable({
@@ -22,6 +24,9 @@ export class LancamentoService {
     const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
     let params = new HttpParams();
 
+    params = params.set('page', filtro.pagina.toString());
+    params = params.set('size', filtro.itensPorPagina.toString());
+
     if (filtro.descricao) {
       params = params.set('descricao', filtro.descricao);
     }
@@ -35,7 +40,14 @@ export class LancamentoService {
     }
 
     return this.http.get(`${this.lancamentosUrl}?resumo`, { headers, params })
-    .toPromise();
-    // .toPromise().then(response => { console.log(response); } );
+    .toPromise()
+    .then( response => {
+      const lancamentos = response['content']
+      const resultado = {
+        lancamentos,
+        total: response['totalElements']
+      };
+      return resultado;
+    });
   }
 }

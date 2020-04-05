@@ -1,12 +1,13 @@
-import { LancamentoService, LancamentoFiltro } from './../lancamento.service';
 import { Component, OnInit } from '@angular/core';
+
+import { LancamentoService, LancamentoFiltro } from './../lancamento.service';
 
 @Component({
   selector: 'app-lancamentos-pesquisa',
   templateUrl: './lancamentos-pesquisa.component.html',
   styleUrls: ['./lancamentos-pesquisa.component.css']
 })
-export class LancamentosPesquisaComponent implements OnInit{
+export class LancamentosPesquisaComponent implements OnInit {
 
   filtro = new LancamentoFiltro();
   lancamentos = [];
@@ -18,9 +19,10 @@ export class LancamentosPesquisaComponent implements OnInit{
   }
 
   pesquisar() {
-    this.lancamentoService.pesquisar( this.filtro )
+    this.lancamentoService.pesquisar(this.filtro)
       .then(resultado => {
         this.lancamentos = resultado.lancamentos;
       });
   }
+
 }
