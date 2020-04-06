@@ -1,10 +1,10 @@
-import { FormControl, NgForm } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
 import { ErrorHandlerService } from './../../core/error-handler.service';
 import { CategoriaService } from './../../categorias/categoria.service';
 import { PessoaService } from './../../pessoas/pessoa.service';
-import { Lancamento } from 'src/app/core/model';
+import { Lancamento } from './../../core/model';
 
 @Component({
   selector: 'app-lancamento-cadastro',
@@ -15,7 +15,7 @@ export class LancamentoCadastroComponent implements OnInit {
 
   tipos = [
     { label: 'Receita', value: 'RECEITA' },
-    { label: 'Despesa', value: 'DESPESA' }
+    { label: 'Despesa', value: 'DESPESA' },
   ];
 
   categorias = [];
@@ -33,7 +33,7 @@ export class LancamentoCadastroComponent implements OnInit {
     this.carregarPessoas();
   }
 
-  salvar(form: NgForm) {
+  salvar(form: FormControl) {
     console.log(this.lancamento);
   }
 
@@ -47,13 +47,12 @@ export class LancamentoCadastroComponent implements OnInit {
   }
 
   carregarPessoas() {
-    return this.pessoaService.listarTodas()
+    this.pessoaService.listarTodas()
       .then(pessoas => {
-        // console.log(typeof this.pessoas, pessoas);
-        pessoas = pessoas['content'];
         this.pessoas = pessoas
-        .map(p => ({ label: p.nome, value: p.codigo }));
+          .map(p => ({ label: p.nome, value: p.codigo }));
       })
       .catch(erro => this.errorHandler.handle(erro));
   }
+
 }
