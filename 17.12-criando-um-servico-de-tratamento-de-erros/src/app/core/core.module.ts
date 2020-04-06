@@ -1,15 +1,14 @@
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { ConfirmationService } from 'primeng/components/common/api';
+import { ConfirmDialogModule } from 'primeng/components/confirmdialog/confirmdialog';
 import { ToastyModule } from 'ng2-toasty';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { ConfirmationService } from 'primeng/api';
 
-import { NavbarComponent } from './navbar/navbar.component';
 import { ErrorHandlerService } from './error-handler.service';
-import { LancamentoService } from '../lancamentos/lancamento.service';
-import { PessoaService } from '../pessoas/pessoa.service';
-
+import { PessoaService } from './../pessoas/pessoa.service';
+import { LancamentoService } from './../lancamentos/lancamento.service';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   imports: [
@@ -27,7 +26,6 @@ import { PessoaService } from '../pessoas/pessoa.service';
   providers: [
     LancamentoService,
     PessoaService,
-
     ErrorHandlerService,
 
     ConfirmationService,
