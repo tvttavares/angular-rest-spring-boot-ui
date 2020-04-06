@@ -11,8 +11,8 @@
   <ng-template pTemplate="body" let-pessoa>
       <tr>
           <td>{{pessoa.nome}}</td>
-          <td>{{pessoa.cidade}}</td>
-          <td>{{pessoa.estado}}</td>
+          <td>{{pessoa.endereco.cidade}}</td>
+          <td>{{pessoa.endereco.estado}}</td>
           <td class="col-valor-content">
               <a href="javascript:;" [pTooltip]="pessoa.ativo == true ? 'Desativar' : 'Ativar'" tooltipPosition="top"
               [style.color]="pessoa.ativo ? 'blue' : 'red'">
