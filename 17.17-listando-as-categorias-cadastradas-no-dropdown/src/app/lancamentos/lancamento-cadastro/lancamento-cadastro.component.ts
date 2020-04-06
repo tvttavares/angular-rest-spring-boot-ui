@@ -12,15 +12,15 @@ export class LancamentoCadastroComponent implements OnInit {
 
   tipos = [
     { label: 'Receita', value: 'RECEITA' },
-    { label: 'Despesa', value: 'DESPESA' }
+    { label: 'Despesa', value: 'DESPESA' },
   ];
 
   categorias = [];
 
   pessoas = [
-    { label: 'Joao da Silva', value: 1 },
-    { label: 'Sebastiao Souza', value: 2 },
-    { label: 'Maria Abadia', value: 3 }
+    { label: 'João da Silva', value: 4 },
+    { label: 'Sebastião Souza', value: 9 },
+    { label: 'Maria Abadia', value: 3 },
   ];
 
   constructor(
@@ -35,9 +35,9 @@ export class LancamentoCadastroComponent implements OnInit {
   carregarCategorias() {
     return this.categoriaService.listarTodas()
       .then(categorias => {
-        this.categorias = categorias
-          .map(c => ({ label: c.nome, value: c.codigo }));
+        this.categorias = categorias.map(c => ({ label: c.nome, value: c.codigo }));
       })
       .catch(erro => this.errorHandler.handle(erro));
   }
+
 }
