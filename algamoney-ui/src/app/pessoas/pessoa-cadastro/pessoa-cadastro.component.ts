@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { ToastyService } from 'ng2-toasty';
 
@@ -21,7 +21,8 @@ export class PessoaCadastroComponent implements OnInit {
     private pessoaService: PessoaService,
     private toasty: ToastyService,
     private errorHandler: ErrorHandlerService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -55,11 +56,12 @@ export class PessoaCadastroComponent implements OnInit {
   adicionarPessoa(form: NgForm) {
     console.log(this.pessoa);
     this.pessoaService.adicionar(this.pessoa)
-      .then(() => {
+      .then(pessoaAdicionada => {
         this.toasty.success('Pessoa adicionada com sucesso!');
 
-        form.reset();
-        this.pessoa = new Pessoa();
+        // form.reset();
+        // this.pessoa = new Pessoa();
+        this.router.navigate(['/pessoas', pessoaAdicionada.codigo]);
       })
       .catch(erro => this.errorHandler.handle(erro));
   }
@@ -72,5 +74,14 @@ export class PessoaCadastroComponent implements OnInit {
       this.toasty.success('Lançamento alterado com sucesso!');
     })
     .catch(erro => this.errorHandler.handle(erro));
+  }
+
+  novo(form: NgForm) {
+    form.reset();
+    setTimeout(function() {
+      this.pessoa = new Pessoa();
+    }.bind(this), 1);
+
+    this.router.navigate(['pessoas/novo']);
   }
 }
