@@ -45,6 +45,14 @@ export class PessoaCadastroComponent implements OnInit {
   }
 
   salvar(form: NgForm) {
+    if (this.editando) {
+      this.atualizarPessoa(form);
+    } else {
+      this.adicionarPessoa(form);
+    }
+  }
+
+  adicionarPessoa(form: NgForm) {
     console.log(this.pessoa);
     this.pessoaService.adicionar(this.pessoa)
       .then(() => {
@@ -54,5 +62,15 @@ export class PessoaCadastroComponent implements OnInit {
         this.pessoa = new Pessoa();
       })
       .catch(erro => this.errorHandler.handle(erro));
+  }
+
+  atualizarPessoa(form: NgForm) {
+    this.pessoaService.atualizar(this.pessoa)
+    .then(pessoa => {
+      this.pessoa = pessoa;
+
+      this.toasty.success('Lançamento alterado com sucesso!');
+    })
+    .catch(erro => this.errorHandler.handle(erro));
   }
 }
