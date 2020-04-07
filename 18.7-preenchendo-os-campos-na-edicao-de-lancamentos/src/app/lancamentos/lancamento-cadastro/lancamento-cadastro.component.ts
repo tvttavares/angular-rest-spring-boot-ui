@@ -1,14 +1,14 @@
-import { NgForm } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import { ToastyService } from 'ng2-toasty';
 
 import { ErrorHandlerService } from './../../core/error-handler.service';
 import { CategoriaService } from './../../categorias/categoria.service';
 import { PessoaService } from './../../pessoas/pessoa.service';
-import { LancamentoService } from '../lancamento.service';
 import { Lancamento } from './../../core/model';
-import { ActivatedRoute } from '@angular/router';
+import { LancamentoService } from './../lancamento.service';
 
 @Component({
   selector: 'app-lancamento-cadastro',
@@ -19,7 +19,7 @@ export class LancamentoCadastroComponent implements OnInit {
 
   tipos = [
     { label: 'Receita', value: 'RECEITA' },
-    { label: 'Despesa', value: 'DESPESA' }
+    { label: 'Despesa', value: 'DESPESA' },
   ];
 
   categorias = [];
@@ -47,13 +47,24 @@ export class LancamentoCadastroComponent implements OnInit {
   }
 
   get editando() {
-    return Boolean(this.lancamento.codigo);
+    return Boolean(this.lancamento.codigo)
   }
 
   carregarLancamento(codigo: number) {
     this.lancamentoService.buscarPorCodigo(codigo)
-      .then( lancamento => {
+      .then(lancamento => {
         this.lancamento = lancamento;
+      })
+      .catch(erro => this.errorHandler.handle(erro));
+  }
+
+  salvar(form: FormControl) {
+    this.lancamentoService.adicionar(this.lancamento)
+      .then(() => {
+        this.toasty.success('Lançamento adicionado com sucesso!');
+
+        form.reset();
+        this.lancamento = new Lancamento();
       })
       .catch(erro => this.errorHandler.handle(erro));
   }
@@ -68,25 +79,12 @@ export class LancamentoCadastroComponent implements OnInit {
   }
 
   carregarPessoas() {
-    return this.pessoaService.listarTodas()
+    this.pessoaService.listarTodas()
       .then(pessoas => {
-        // console.log(typeof this.pessoas, pessoas);
-        pessoas = pessoas['content'];
         this.pessoas = pessoas
-        .map(p => ({ label: p.nome, value: p.codigo }));
+          .map(p => ({ label: p.nome, value: p.codigo }));
       })
       .catch(erro => this.errorHandler.handle(erro));
   }
 
-  salvar(form: NgForm) {
-    console.log(this.lancamento);
-    this.lancamentoService.adicionar(this.lancamento)
-      .then(() => {
-        this.toasty.success('Lançamento adicionado com sucesso!');
-
-        form.reset();
-        this.lancamento = new Lancamento();
-      })
-      .catch(erro => this.errorHandler.handle(erro));
-  }
 }
