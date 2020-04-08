@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 import { ToastyService } from 'ng2-toasty';
 
@@ -22,10 +23,13 @@ export class PessoaCadastroComponent implements OnInit {
     private toasty: ToastyService,
     private errorHandler: ErrorHandlerService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private title: Title
   ) { }
 
   ngOnInit(): void {
+    this.title.setTitle('Cadastro de Pessoas');
+
     const codigoPessoa = this.route.snapshot.params['codigo'];
 
     if (codigoPessoa) {
@@ -41,6 +45,7 @@ export class PessoaCadastroComponent implements OnInit {
     this.pessoaService.buscarPorCodigo(codigo)
       .then( pessoa => {
         this.pessoa = pessoa;
+        this.atualizarTituloEdicao();
       })
       .catch(erro => this.errorHandler.handle(erro));
   }
@@ -72,6 +77,7 @@ export class PessoaCadastroComponent implements OnInit {
       this.pessoa = pessoa;
 
       this.toasty.success('Lançamento alterado com sucesso!');
+      this.atualizarTituloEdicao();
     })
     .catch(erro => this.errorHandler.handle(erro));
   }
@@ -83,5 +89,9 @@ export class PessoaCadastroComponent implements OnInit {
     }.bind(this), 1);
 
     this.router.navigate(['pessoas/novo']);
+  }
+
+  atualizarTituloEdicao() {
+    this.title.setTitle(`Edição da pessoa: ${this.pessoa.nome}`);
   }
 }
