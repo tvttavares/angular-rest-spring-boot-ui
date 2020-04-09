@@ -12,12 +12,12 @@ import { LancamentoService, LancamentoFiltro } from './../lancamento.service';
   templateUrl: './lancamentos-pesquisa.component.html',
   styleUrls: ['./lancamentos-pesquisa.component.css']
 })
-export class LancamentosPesquisaComponent implements OnInit{
+export class LancamentosPesquisaComponent implements OnInit {
 
   totalRegistros = 0;
   filtro = new LancamentoFiltro();
   lancamentos = [];
-  @ViewChild('tabela', {static: true}) grid;
+  @ViewChild('tabela', { static: true }) grid;
 
   constructor(
     private lancamentoService: LancamentoService,
@@ -35,7 +35,7 @@ export class LancamentosPesquisaComponent implements OnInit{
   pesquisar(pagina = 0) {
     this.filtro.pagina = pagina;
 
-    this.lancamentoService.pesquisar( this.filtro )
+    this.lancamentoService.pesquisar(this.filtro)
       .then(resultado => {
         this.totalRegistros = resultado.total;
         this.lancamentos = resultado.lancamentos;
@@ -61,7 +61,7 @@ export class LancamentosPesquisaComponent implements OnInit{
     this.lancamentoService.excluir(lancamento.codigo)
       .then(() => {
         this.grid.reset();
-        this.toasty.success('Lancamento exlcuido com sucesso');
+        this.toasty.success('Lancamento excluido com sucesso');
       })
       .catch(erro => this.errorHandler.handle(erro));
   }

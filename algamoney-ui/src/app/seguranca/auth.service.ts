@@ -25,7 +25,7 @@ export class AuthService {
 
     return this.http.post(this.oauthTokenUrl, body, { headers, withCredentials: true })
       .toPromise()
-      .then( response => {
+      .then(response => {
         // console.log(response);
         this.armazenarToken(response['access_token']);
       })
@@ -51,6 +51,11 @@ export class AuthService {
     if (token) {
       this.armazenarToken(token);
     }
+  }
+
+  isAccessTokenInvalido() {
+    const token = localStorage.getItem('token');
+    return !token || this.jwtHelper.isTokenExpired(token);
   }
 
   obterNovoAccessToken(): Promise<void> {

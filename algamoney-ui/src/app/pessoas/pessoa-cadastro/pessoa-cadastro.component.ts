@@ -43,7 +43,7 @@ export class PessoaCadastroComponent implements OnInit {
 
   carregarPessoa(codigo: number) {
     this.pessoaService.buscarPorCodigo(codigo)
-      .then( pessoa => {
+      .then(pessoa => {
         this.pessoa = pessoa;
         this.atualizarTituloEdicao();
       })
@@ -73,13 +73,13 @@ export class PessoaCadastroComponent implements OnInit {
 
   atualizarPessoa(form: NgForm) {
     this.pessoaService.atualizar(this.pessoa)
-    .then(pessoa => {
-      this.pessoa = pessoa;
+      .then(pessoa => {
+        this.pessoa = pessoa;
 
-      this.toasty.success('Lançamento alterado com sucesso!');
-      this.atualizarTituloEdicao();
-    })
-    .catch(erro => this.errorHandler.handle(erro));
+        this.toasty.success('Lançamento alterado com sucesso!');
+        this.atualizarTituloEdicao();
+      })
+      .catch(erro => this.errorHandler.handle(erro));
   }
 
   novo(form: NgForm) {

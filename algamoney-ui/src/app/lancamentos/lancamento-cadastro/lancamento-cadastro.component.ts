@@ -57,7 +57,7 @@ export class LancamentoCadastroComponent implements OnInit {
 
   carregarLancamento(codigo: number) {
     this.lancamentoService.buscarPorCodigo(codigo)
-      .then( lancamento => {
+      .then(lancamento => {
         this.lancamento = lancamento;
         this.atualizarTituloEdicao();
       })
@@ -79,7 +79,7 @@ export class LancamentoCadastroComponent implements OnInit {
         // console.log(typeof this.pessoas, pessoas);
         pessoas = pessoas['content'];
         this.pessoas = pessoas
-        .map(p => ({ label: p.nome, value: p.codigo }));
+          .map(p => ({ label: p.nome, value: p.codigo }));
       })
       .catch(erro => this.errorHandler.handle(erro));
   }
@@ -107,18 +107,18 @@ export class LancamentoCadastroComponent implements OnInit {
 
   atualizarLancamento(form: NgForm) {
     this.lancamentoService.atualizar(this.lancamento)
-    .then(lancamento => {
-      this.lancamento = lancamento;
+      .then(lancamento => {
+        this.lancamento = lancamento;
 
-      this.toasty.success('Lançamento alterado com sucesso!');
-      this.atualizarTituloEdicao();
-    })
-    .catch(erro => this.errorHandler.handle(erro));
+        this.toasty.success('Lançamento alterado com sucesso!');
+        this.atualizarTituloEdicao();
+      })
+      .catch(erro => this.errorHandler.handle(erro));
   }
 
   novo(form: NgForm) {
     form.reset();
-    setTimeout(function() {
+    setTimeout(function () {
       this.lancamento = new Lancamento();
     }.bind(this), 1);
 
