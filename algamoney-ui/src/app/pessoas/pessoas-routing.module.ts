@@ -11,7 +11,7 @@ const routes: Routes = [
     component: PessoasPesquisaComponent, canActivate: [AuthGuard], data: { roles: ['ROLE_PESQUISAR_PESSOA'] }
   },
   {
-    path: 'pessoas/nova',
+    path: 'pessoas/novo',
     component: PessoaCadastroComponent, canActivate: [AuthGuard], data: { roles: ['ROLE_CADASTRAR_PESSOA'] }
   },
   {
