@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
-import { ToastyService } from 'ng2-toasty';
-import { NotAuthenticatedError } from '../seguranca/money-http';
 import { Router } from '@angular/router';
+import { Injectable } from '@angular/core';
+import { Response } from '@angular/http';
 
-@Injectable({
-  providedIn: 'root'
-})
+import { NotAuthenticatedError } from './../seguranca/money-http';
+import { ToastyService } from 'ng2-toasty';
+
+@Injectable()
 export class ErrorHandlerService {
 
   constructor(
@@ -23,11 +23,13 @@ export class ErrorHandlerService {
       msg = 'Sua sessão expirou!';
       this.router.navigate(['/login']);
 
-    } else if (errorResponse.status >= 400 && errorResponse.status <= 499) {
+    } else if (errorResponse instanceof Response
+        && errorResponse.status >= 400 && errorResponse.status <= 499) {
       let errors;
-      msg = 'Ocorreu um erro ao processar a sua solicitação.';
+      msg = 'Ocorreu um erro ao processar a sua solicitação';
+
       if (errorResponse.status === 403) {
-        msg = 'Voce não tem permissão para executar esta ação.';
+        msg = 'Você não tem permissão para executar esta ação';
       }
 
       try {
@@ -37,11 +39,13 @@ export class ErrorHandlerService {
       } catch (e) { }
 
       console.error('Ocorreu um erro', errorResponse);
+
     } else {
-      msg = 'Erro ao processar servico remoto. Tente novamente.';
-      console.log('Ocorreu um erro', errorResponse);
+      msg = 'Erro ao processar serviço remoto. Tente novamente.';
+      console.error('Ocorreu um erro', errorResponse);
     }
 
     this.toasty.error(msg);
   }
+
 }
