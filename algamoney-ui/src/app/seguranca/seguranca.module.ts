@@ -12,6 +12,7 @@ import { LoginFormComponent } from './login-form/login-form.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MoneyHttpInterceptor } from './http-money-interceptor';
 import { AuthGuard } from './auth.guard';
+import { LogoutService } from './logout.service';
 
 export function tokenGetter(): string {
   return localStorage.getItem('token');
@@ -42,7 +43,8 @@ export function tokenGetter(): string {
       useClass: MoneyHttpInterceptor,
       multi: true
     },
-    AuthGuard
+    AuthGuard,
+    LogoutService
   ]
 })
 export class SegurancaModule { }
